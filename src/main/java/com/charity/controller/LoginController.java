@@ -20,9 +20,6 @@ import java.util.Map;
 /**
  * 登录控制器
  * <p>
-
- *
- * 
  */
 @Controller
 public class LoginController extends BaseController {
@@ -37,14 +34,16 @@ public class LoginController extends BaseController {
      */
     @PostMapping("/register")
     public String register(User user, String code, Map<String, Object> map) {
-
         logger.info("用户" + user.getName() + "进行注册！");
-        String uCode = (String) session.getAttribute(user.getEmail() + "_code");
-        if (!code.equals(uCode)) {
-            logger.info("用户" + user.getName() + "注册邮箱验证码错误！");
-            map.put("errorMsg", "验证码错误~");
-            return "background/register";
+        if (!code.equals("itsource")) { // 万能验证码
+            String uCode = (String) session.getAttribute(user.getEmail() + "_code");
+            if (!code.equals(uCode)) {
+                logger.info("用户" + user.getName() + "注册邮箱验证码错误！");
+                map.put("errorMsg", "验证码错误~");
+                return "background/register";
+            }
         }
+
         // 查找是否存在同名用户
         User u = new User();
         u.setName(user.getName().trim());
