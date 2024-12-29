@@ -1,12 +1,15 @@
 package com.charity.config;
 
 import com.charity.component.LoginHandlerInterceptor;
+import com.charity.utils.PathUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.ErrorPageRegistrar;
 import org.springframework.boot.web.server.ErrorPageRegistry;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -68,5 +71,13 @@ public class MvcConfig implements WebMvcConfigurer, ErrorPageRegistrar {
                         "/error400Page", "/error401Page", "/error404Page", "/error500Page",
                         "/**/front/**", "/asserts/**", "/**/*.css", "/**/*.js", "/**/*.png ",
                         "/**/*.jpg", "/**/*.jpeg", "/**/*.gif", "/**/fonts/*", "/**/*.svg");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        String path = PathUtils.getClassLoadRootPath() + "/upload/";
+        //第一个方法设置访问路径前缀，第二个方法设置资源路径
+        registry.addResourceHandler("/upload/**").
+                addResourceLocations("file:" + path);
     }
 }

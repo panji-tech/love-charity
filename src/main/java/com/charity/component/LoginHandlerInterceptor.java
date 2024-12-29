@@ -2,6 +2,7 @@ package com.charity.component;
 
 import com.charity.constant.RoleStatus;
 import com.charity.entity.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,9 @@ import java.util.List;
  * 
  */
 public class LoginHandlerInterceptor implements HandlerInterceptor {
+
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
 
     /**
      * 在目标方式执行之前执行
@@ -37,14 +41,14 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         User user = (User) request.getSession().getAttribute("loginUser");
         if (user == null) {
             //未登录,返回登录页面
-            response.sendRedirect("/love-charity/login-page");
+            response.sendRedirect(contextPath+"/login-page");
             return false;
         } else {
             // 如果是普通用户
             if (user.getRole() == RoleStatus.USER) {
                 // 访问管理员路径
                 if (adminPath.contains(path)) {
-                    response.sendRedirect("/love-charity/error401Page");
+                    response.sendRedirect(contextPath+"/error401Page");
                     return false;
                 }
             }

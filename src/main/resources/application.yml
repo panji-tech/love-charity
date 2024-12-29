@@ -57,3 +57,7 @@ spring:
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
+
+file:
+  upload:
+    ossEnable: false # 是否开启oss上传. 默认false，为本地上传
