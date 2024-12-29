@@ -15,7 +15,7 @@ spring:
     cache: false
   mail:
     username: itsources@qq.com
-    password: 960427li
+    password:
     host: smtp.qq.com
     port: 465
     properties:
