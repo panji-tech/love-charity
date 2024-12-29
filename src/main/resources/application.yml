@@ -14,8 +14,8 @@ spring:
   thymeleaf:
     cache: false
   mail:
-    username: 373675032@qq.com
-    password:
+    username: itsources@qq.com
+    password: 960427li
     host: smtp.qq.com
     port: 465
     properties:
@@ -30,9 +30,9 @@ spring:
             class: javax.net.ssl.SSLSocketFactory
             fallback: false
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/love-charity?serverTimezone=Hongkong&useAffectedRows=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://127.0.0.1:13306/itsource39?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true
     username: root
-    password: xuewei
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 5
